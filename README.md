@@ -29,7 +29,15 @@ npm install
 npm run dev                 # http://localhost:5173
 ```
 
-Usuarios de prueba (seed): `admin@passmaster.test / Admin123!` · `staff@passmaster.test / Staff123!`.
+Usuarios de prueba (seed):
+
+| Rol | Email | Contraseña |
+|-----|-------|------------|
+| Admin | `admin@passmaster.test` | `Admin123!` |
+| Staff | `staff@passmaster.test` | `Staff123!` |
+| Cliente | `cliente@passmaster.test` | `Cliente123!` |
+| Andres | `andres@passmaster.test` | `andres12345` |
+
 Los clientes se registran desde la web (rol `customer`).
 
 ## Arquitectura (MVC)
