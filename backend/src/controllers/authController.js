@@ -3,7 +3,12 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/userModel');
 const httpError = require('../utils/httpError');
 
-const sign = (u) => jwt.sign({ id: u.id, role: u.role, name: u.name }, process.env.JWT_SECRET,
+if (!process.env.JWT_SECRET) {
+  console.warn('[ADVERTENCIA] JWT_SECRET no definido; usando valor por defecto para desarrollo. Cambialo en .env para produccion.');
+}
+const JWT_SECRET = process.env.JWT_SECRET || 'passmaster-dev-secret-cambiar-en-produccion';
+
+const sign = (u) => jwt.sign({ id: u.id, role: u.role, name: u.name }, JWT_SECRET,
   { expiresIn: process.env.JWT_EXPIRES || '8h' });
 
 exports.register = async (req, res, next) => {
