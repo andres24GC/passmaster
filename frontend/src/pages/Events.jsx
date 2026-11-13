@@ -4,12 +4,12 @@ import { api } from '../api';
 import { useAuth } from '../auth';
 
 const EVENT_IMAGES = [
-  'https://images.unsplash.com/photo-1459749411477-64901fa7790e?w=800&q=80', // concierto
-  'https://images.unsplash.com/photo-1514519774440-3e134950f925?w=800&q=80', // jazz
-  'https://images.unsplash.com/photo-1517694691331-4d5e5a1e1f4e?w=800&q=80', // teatro
-  'https://images.unsplash.com/photo-1535102908407-7e73941c2c48?w=800&q=80', // conferencia
-  'https://images.unsplash.com/photo-1461896836736-2de47fd90c49?w=800&q=80', // fútbol
-  'https://images.unsplash.com/photo-1579783930042-2ee0759d0a06?w=800&q=80', // arte
+  'https://images.unsplash.com/photo-1459749411477-64901fa7790e?w=800&q=80',
+  'https://images.unsplash.com/photo-1514519774440-3e134950f925?w=800&q=80',
+  'https://images.unsplash.com/photo-1517694691331-4d5e5a1e1f4e?w=800&q=80',
+  'https://images.unsplash.com/photo-1535102908407-7e73941c2c48?w=800&q=80',
+  'https://images.unsplash.com/photo-1461896836736-2de47fd90c49?w=800&q=80',
+  'https://images.unsplash.com/photo-1579783930042-2ee0759d0a06?w=800&q=80',
 ];
 
 const money = (n) => Number(n).toLocaleString('es-CO', { style: 'currency', currency: 'COP', maximumFractionDigits: 0 });
@@ -23,7 +23,7 @@ export default function Events() {
   const [token, setToken] = useState('tok_visa');
   const [msg, setMsg] = useState(null);
   const [busy, setBusy] = useState(false);
-  const [receipt, setReceipt] = useState(null); // recibo de pago exitoso
+  const [receipt, setReceipt] = useState(null);
 
   const load = () => api('/events').then(setEvents).catch(() => setEvents([]));
   useEffect(() => { load(); }, []);
@@ -43,17 +43,17 @@ export default function Events() {
 
   return (
     <>
-      {/* Hero */}
-      <section className="bg-indigo-700 text-white py-16 px-4 relative overflow-hidden">
-        <div className="absolute inset-0 opacity-15 bg-[url('https://images.unsplash.com/photo-1533155820116-7d9a2b6f624e?w=1600&q=80')] bg-cover bg-center" />
+      {/* Hero - sin azul, tono slate oscuro */}
+      <section className="bg-slate-900 text-white py-16 px-4 relative overflow-hidden">
+        <div className="absolute inset-0 opacity-20 bg-[url('https://images.unsplash.com/photo-1533155820116-7d9a2b6f624e?w=1600&q=80')] bg-cover bg-center" />
         <div className="relative max-w-5xl mx-auto z-10">
-          <span className="inline-block bg-indigo-500 text-white text-xs font-bold px-3 py-1 rounded-full mb-4 uppercase tracking-wider">
+          <span className="inline-block bg-slate-700 text-white text-xs font-bold px-3 py-1 rounded-full mb-4 uppercase tracking-wider">
             PassMaster • Ticketing de Eventos
           </span>
           <h1 className="text-4xl md:text-5xl font-bold mb-4 leading-tight">
             Boletos digitales con código único y QR
           </h1>
-          <p className="text-indigo-100 text-lg max-w-2xl">
+          <p className="text-slate-300 text-lg max-w-2xl">
             Compra boletos, genera tickets con identificador único y controla el acceso en tiempo real.
           </p>
         </div>
@@ -66,13 +66,13 @@ export default function Events() {
             <p className="text-slate-500">Elige un evento y compra tus boletos</p>
           </div>
           {events.length > 0 && (
-            <span className="px-3 py-1 rounded-full bg-green-100 text-green-700 text-sm font-bold">
+            <span className="px-3 py-1 rounded-full bg-emerald-100 text-emerald-700 text-sm font-bold">
               {events.length} evento{events.length !== 1 ? 's' : ''}
             </span>
           )}
         </div>
 
-        {/* Eventos - grid consistente, tarjetas alineadas */}
+        {/* Eventos - grid consistente con imágenes */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {events.length === 0 ? (
             <div className="col-span-3 flex flex-col items-center justify-center py-20 bg-white rounded-2xl shadow border border-slate-200">
@@ -83,7 +83,7 @@ export default function Events() {
               </div>
               <h3 className="text-lg font-semibold text-slate-800 mb-2">No hay eventos disponibles</h3>
               {user?.role === 'admin' && (
-                <p className="text-sm text-slate-500 mb-4">Crea uno desde el <a href="/admin" className="text-indigo-600 hover:underline font-medium">Dashboard</a>.</p>
+                <p className="text-sm text-slate-500 mb-4">Crea uno desde el <a href="/admin" className="text-slate-600 hover:underline font-medium">Dashboard</a>.</p>
               )}
               {user?.role === 'staff' && (
                 <p className="text-sm text-slate-500 mb-4">Espera a que el administrador cree eventos.</p>
@@ -97,7 +97,6 @@ export default function Events() {
 
               return (
                 <div key={e.id} className="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden hover:shadow-md transition duration-300 flex flex-col h-full">
-                  {/* Imagen del evento - altura fija para alinear todas las tarjetas */}
                   <div className="h-52 relative overflow-hidden">
                     <img
                       src={img}
@@ -107,7 +106,7 @@ export default function Events() {
                     />
                     <div className="absolute top-3 left-3 z-10">
                       <span className={`px-2.5 py-1 rounded text-xs font-bold ${
-                        available > 0 ? 'bg-green-600 text-white' : 'bg-red-600 text-white'
+                        available > 0 ? 'bg-emerald-600 text-white' : 'bg-rose-600 text-white'
                       }`}>
                         {available > 0 ? 'Disponible' : 'Agotado'}
                       </span>
@@ -138,18 +137,16 @@ export default function Events() {
                       </div>
                     </div>
 
-                    {/* Barra de aforo */}
                     <div className="mb-5">
                       <div className="flex justify-between text-xs text-slate-500 mb-1">
                         <span>Disponibles: {available}</span>
                         <span>Vendidos: {e.sold || 0}</span>
                       </div>
                       <div className="w-full bg-slate-100 rounded-full h-2 overflow-hidden">
-                        <div className="h-full bg-indigo-600 transition-all duration-500" style={{ width: `${pct}%` }} />
+                        <div className="h-full bg-slate-600 transition-all duration-500" style={{ width: `${pct}%` }} />
                       </div>
                     </div>
 
-                    {/* Botón de compra - solo clientes */}
                     <button
                       disabled={!canBuy || available <= 0 || busy}
                       onClick={() => canBuy ? (setSel(e), setQty(1), setMsg(null)) : nav('/login')}
@@ -157,8 +154,8 @@ export default function Events() {
                         !canBuy
                           ? 'bg-slate-200 text-slate-400 cursor-not-allowed'
                           : available <= 0
-                            ? 'bg-red-100 text-red-500 cursor-not-allowed'
-                            : 'bg-indigo-600 hover:bg-indigo-500 hover:shadow-lg'
+                            ? 'bg-rose-100 text-rose-500 cursor-not-allowed'
+                            : 'bg-slate-800 hover:bg-slate-700 hover:shadow-lg'
                       }`}
                     >
                       {!canBuy ? (
@@ -179,24 +176,24 @@ export default function Events() {
           )}
         </div>
 
-        {/* Confirmación de pago exitoso (recibo) */}
+        {/* Recibo de pago - sin azul */}
         {receipt && (
-          <div className="mt-8 bg-green-50 border border-green-200 rounded-2xl p-6 shadow-sm">
+          <div className="mt-8 bg-emerald-50 border border-emerald-200 rounded-2xl p-6 shadow-sm">
             <div className="flex items-start gap-4">
-              <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
-                <svg className="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="w-10 h-10 bg-emerald-100 rounded-full flex items-center justify-center flex-shrink-0">
+                <svg className="w-5 h-5 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
                 </svg>
               </div>
               <div>
-                <h3 className="font-bold text-green-800 mb-1">¡Pago aprobado!</h3>
-                <p className="text-sm text-green-700">Tu pago fue procesado exitosamente. Se han generado tus boletos.</p>
+                <h3 className="font-bold text-emerald-800 mb-1">¡Pago aprobado!</h3>
+                <p className="text-sm text-emerald-700">Tu pago fue procesado exitosamente. Se han generado tus boletos.</p>
               </div>
             </div>
             <div className="mt-4 p-4 bg-white rounded-lg border border-slate-100">
               <div className="flex justify-between text-sm mb-2">
                 <span className="text-slate-500">Referencia de pago:</span>
-                <span className="font-mono text-green-600 font-semibold">{receipt.reference}</span>
+                <span className="font-mono text-emerald-600 font-semibold">{receipt.reference}</span>
               </div>
               <div className="flex justify-between text-sm mb-2">
                 <span className="text-slate-500">Método:</span>
@@ -204,15 +201,15 @@ export default function Events() {
               </div>
               <div className="flex justify-between text-sm font-bold">
                 <span className="text-slate-600">Total:</span>
-                <span className="text-green-600">{money(receipt.amount)}</span>
+                <span className="text-emerald-600">{money(receipt.amount)}</span>
               </div>
             </div>
-            <p className="mt-3 text-sm text-slate-500">Ve a <a href="/tickets" className="text-indigo-600 hover:underline font-medium">Mis tickets</a> para ver tus boletos con QR.</p>
+            <p className="mt-3 text-sm text-slate-500">Ve a <a href="/tickets" className="text-slate-600 hover:underline font-medium">Mis tickets</a> para ver tus boletos con QR.</p>
           </div>
         )}
       </div>
 
-      {/* Modal de compra */}
+      {/* Modal de compra - sin azul */}
       {sel && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm" onClick={() => setSel(null)}>
           <div className="bg-white rounded-2xl shadow-2xl w-full max-w-md p-6 relative mx-2 md:mx-0" onClick={(e) => e.stopPropagation()}>
@@ -282,13 +279,13 @@ export default function Events() {
               </div>
             </div>
 
-            {msg && <p className="text-red-600 text-sm mb-4">{msg}</p>}
+            {msg && <p className="text-rose-600 text-sm mb-4">{msg}</p>}
 
             <div className="flex gap-3">
               <button
                 onClick={buy}
                 disabled={busy}
-                className="flex-1 bg-green-600 text-white py-3.5 rounded-xl font-bold disabled:opacity-50 hover:bg-green-500 transition shadow-lg"
+                className="flex-1 bg-emerald-600 text-white py-3.5 rounded-xl font-bold disabled:opacity-50 hover:bg-emerald-500 transition shadow-lg"
               >
                 {busy ? 'Procesando pago…' : 'Pagar boletos'}
               </button>

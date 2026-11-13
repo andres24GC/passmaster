@@ -23,7 +23,7 @@ export default function Login() {
       <input className={input} type="email" placeholder="Email" value={f.email} onChange={set('email')} />
       <input className={input} type="password" placeholder="Contraseña (mín. 8)" value={f.password} onChange={set('password')} />
       {err && <p className="text-red-600 text-sm mb-3">{err}</p>}
-      <button className="w-full bg-indigo-600 text-white rounded p-2 hover:bg-indigo-500">
+      <button className="w-full bg-slate-800 text-white rounded-lg p-2 hover:bg-slate-700 transition">
         {mode === 'login' ? 'Entrar' : 'Registrarme'}
       </button>
       <button type="button" className="text-sm text-indigo-600 mt-3"
