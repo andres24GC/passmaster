@@ -18,6 +18,7 @@ router.get('/admin/dashboard', authenticate, authorize('admin'), events.dashboar
 router.post('/orders', authenticate, authorize('customer'), orders.create);
 router.post('/orders/:id/pay', authenticate, authorize('customer'), orders.pay);
 router.get('/orders/mine', authenticate, orders.mine);
+router.get('/orders/:id', authenticate, orders.detail);
 
 router.get('/tickets/mine', authenticate, tickets.mine);
 router.get('/tickets/:code', authenticate, authorize('staff', 'admin'), tickets.lookup);

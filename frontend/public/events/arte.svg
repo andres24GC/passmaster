@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" width="800" height="400">
+  <defs>
+    <linearGradient id="pared" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fafaf9"/><stop offset="1" stop-color="#e7e5e4"/>
+    </linearGradient>
+    <linearGradient id="piso" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#d6d3d1"/><stop offset="1" stop-color="#a8a29e"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="400" fill="url(#pared)"/>
+  <rect y="320" width="800" height="80" fill="url(#piso)"/>
+  <rect x="0" y="316" width="800" height="6" fill="#78716c"/>
+  <g>
+    <rect x="70" y="70" width="180" height="180" fill="#1c1917"/>
+    <rect x="82" y="82" width="156" height="156" fill="#f8fafc"/>
+    <path d="M92 210 q30 -70 60 -40 q30 30 70 -60 v108 h-130 z" fill="#059669"/>
+    <circle cx="180" cy="120" r="26" fill="#f59e0b"/>
+  </g>
+  <g>
+    <rect x="310" y="46" width="180" height="180" fill="#1c1917"/>
+    <rect x="322" y="58" width="156" height="156" fill="#f8fafc"/>
+    <path d="M332 194 l40 -80 34 44 26 -30 44 66 z" fill="#db2777"/>
+    <circle cx="430" cy="98" r="22" fill="#7c3aed"/>
+  </g>
+  <g>
+    <rect x="550" y="70" width="180" height="180" fill="#1c1917"/>
+    <rect x="562" y="82" width="156" height="156" fill="#f8fafc"/>
+    <path d="M572 220 q34 -60 70 -30 q36 30 66 -50 v100 h-136 z" fill="#ea580c"/>
+    <circle cx="650" cy="128" r="24" fill="#0891b2"/>
+  </g>
+  <g fill="#1c1917">
+    <circle cx="200" cy="330" r="16"/><rect x="186" y="344" width="28" height="56" rx="9"/>
+    <circle cx="420" cy="336" r="16"/><rect x="406" y="350" width="28" height="50" rx="9"/>
+    <circle cx="620" cy="330" r="16"/><rect x="606" y="344" width="28" height="56" rx="9"/>
+  </g>
+  <g stroke="#1c1917" stroke-width="7" stroke-linecap="round" fill="none">
+    <path d="M214 330 l14 -22"/><path d="M434 336 l12 -24"/><path d="M634 330 l14 -22"/>
+  </g>
+  <text x="400" y="300" font-family="Georgia, serif" font-size="26" font-weight="bold" fill="#292524" text-anchor="middle" letter-spacing="4">EXPOSICIÓN</text>
+</svg>

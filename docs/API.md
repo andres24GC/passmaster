@@ -23,8 +23,9 @@ Roles: `customer`, `staff`, `admin`.
 ## Pedidos y pago
 | Método | Ruta | Acceso | Descripción |
 |---|---|---|---|
-| POST | `/orders` | Autenticado | Reserva cupos. Body: `{eventId, quantity(1-10)}` → `201 {id,total,status:"PENDING"}`; `409` sin cupo |
-| POST | `/orders/:id/pay` | Dueño del pedido | Body: `{paymentToken}` (`tok_visa`, `tok_declined`, `tok_funds`). Éxito → `200 {status:"PAID",paymentRef,tickets:[uuid]}`; rechazo → `402` y se liberan cupos; `409` si ya procesado |
+| POST | `/orders` | customer | Reserva cupos. Body: `{eventId, quantity(1-10)}` → `201 {id,total,status:"PENDING"}`; `409` sin cupo; `403` si no es customer |
+| POST | `/orders/:id/pay` | customer (dueño) | Body: `{paymentToken}`. Éxito → `200 {status:"PAID",paymentRef,receipt:{reference,eventName,quantity,paymentMethod,amount},tickets:[uuid]}`; rechazo → `402` y se liberan cupos; `409` si ya procesado |
+| GET | `/orders/:id` | Dueño del pedido | Estado del pago: `{id,status,quantity,total,eventName,paymentRef,createdAt}` |
 | GET | `/orders/mine` | Autenticado | Pedidos del usuario |
 
 ## Tickets

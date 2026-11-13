@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" width="800" height="400">
+  <defs>
+    <linearGradient id="stage" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#450a0a"/><stop offset="1" stop-color="#7f1d1d"/>
+    </linearGradient>
+    <linearGradient id="curtain" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#991b1b"/><stop offset=".5" stop-color="#b91c1c"/><stop offset="1" stop-color="#7f1d1d"/>
+    </linearGradient>
+    <radialGradient id="luz" cx=".5" cy=".3" r=".55">
+      <stop offset="0" stop-color="#fde68a" stop-opacity=".8"/><stop offset="1" stop-color="#fde68a" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="800" height="400" fill="url(#stage)"/>
+  <rect width="800" height="400" fill="url(#luz)"/>
+  <path d="M0 0 h150 q-20 120 10 240 q-30 80 0 160 H0 z" fill="url(#curtain)"/>
+  <path d="M800 0 h-150 q20 120 -10 240 q30 80 0 160 h150 z" fill="url(#curtain)"/>
+  <path d="M0 0 h800 v46 q-100 34 -200 14 q-100 -20 -200 6 q-100 26 -200 4 q-100 -22 -200 4 z" fill="#7f1d1d"/>
+  <rect y="330" width="800" height="70" fill="#450a0a"/>
+  <rect y="330" width="800" height="8" fill="#fbbf24" opacity=".5"/>
+  <g fill="#1c1917">
+    <circle cx="372" cy="180" r="26"/><rect x="348" y="204" width="48" height="86" rx="16"/>
+    <circle cx="440" cy="188" r="24"/><rect x="418" y="210" width="44" height="80" rx="16"/>
+  </g>
+  <g fill="#fbbf24" opacity=".95">
+    <path d="M336 250 q-26 -14 -30 -44" stroke="#fbbf24" stroke-width="9" fill="none" stroke-linecap="round"/>
+    <path d="M462 256 q28 -12 34 -44" stroke="#fbbf24" stroke-width="9" fill="none" stroke-linecap="round"/>
+  </g>
+  <g fill="#fef3c7">
+    <path d="M620 130 l10 22 24 3 -17 17 4 24 -21 -11 -21 11 4 -24 -17 -17 24 -3 z"/>
+    <path d="M180 170 l7 15 17 2 -12 12 3 17 -15 -8 -15 8 3 -17 -12 -12 17 -2 z" opacity=".8"/>
+  </g>
+  <text x="400" y="305" font-family="Georgia, serif" font-size="30" font-weight="bold" fill="#fef3c7" text-anchor="middle" opacity=".9">OBRA DE TEATRO</text>
+</svg>

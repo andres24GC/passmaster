@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" width="800" height="400">
+  <defs>
+    <linearGradient id="fondo" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#052e16"/><stop offset="1" stop-color="#14532d"/>
+    </linearGradient>
+    <radialGradient id="luzEstadio" cx=".5" cy="0" r=".8">
+      <stop offset="0" stop-color="#fef9c3" stop-opacity=".5"/><stop offset="1" stop-color="#fef9c3" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="cesped" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#16a34a"/><stop offset="1" stop-color="#15803d"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="400" fill="url(#fondo)"/>
+  <rect width="800" height="400" fill="url(#luzEstadio)"/>
+  <ellipse cx="400" cy="340" rx="360" ry="90" fill="url(#cesped)"/>
+  <ellipse cx="400" cy="340" rx="360" ry="90" fill="none" stroke="#ecfccb" stroke-width="4" opacity=".85"/>
+  <line x1="400" y1="252" x2="400" y2="428" stroke="#ecfccb" stroke-width="4" opacity=".85"/>
+  <ellipse cx="400" cy="340" rx="70" ry="34" fill="none" stroke="#ecfccb" stroke-width="4" opacity=".85"/>
+  <g fill="#052e16">
+    <circle cx="80" cy="200" r="18"/><rect x="64" y="216" width="32" height="40" rx="10"/>
+    <circle cx="170" cy="190" r="18"/><rect x="154" y="206" width="32" height="40" rx="10"/>
+    <circle cx="630" cy="190" r="18"/><rect x="614" y="206" width="32" height="40" rx="10"/>
+    <circle cx="720" cy="200" r="18"/><rect x="704" y="216" width="32" height="40" rx="10"/>
+  </g>
+  <g>
+    <rect x="40" y="40" width="90" height="52" rx="8" fill="#0f172a"/>
+    <g fill="#fef9c3"><circle cx="62" cy="66" r="8"/><circle cx="85" cy="66" r="8"/><circle cx="108" cy="66" r="8"/></g>
+    <rect x="670" y="40" width="90" height="52" rx="8" fill="#0f172a"/>
+    <g fill="#fef9c3"><circle cx="692" cy="66" r="8"/><circle cx="715" cy="66" r="8"/><circle cx="738" cy="66" r="8"/></g>
+  </g>
+  <g transform="translate(340 270)">
+    <circle cx="30" cy="30" r="30" fill="#f8fafc"/>
+    <path d="M30 6 l10 8 -4 12 h-12 l-4 -12 z M6 34 l14 4 4 12 -12 8 -10 -6 z M54 34 l-14 4 -4 12 12 8 10 -6 z M20 12 l10 8 10 -8 -4 -10 h-12 z" fill="#0f172a"/>
+    <circle cx="30" cy="30" r="30" fill="none" stroke="#0f172a" stroke-width="3"/>
+  </g>
+  <g fill="#f8fafc">
+    <circle cx="470" cy="300" r="14"/><rect x="458" y="312" width="24" height="46" rx="9"/>
+    <circle cx="300" cy="305" r="14"/><rect x="288" y="317" width="24" height="46" rx="9"/>
+  </g>
+  <text x="400" y="160" font-family="Arial, sans-serif" font-size="38" font-weight="bold" fill="#f8fafc" text-anchor="middle">FINAL 2026</text>
+</svg>

@@ -33,7 +33,9 @@ exports.reserve = (userId, eventId, qty) => tx(async (c) => {
 });
 
 exports.findOwned = async (id, userId) =>
-  (await pool.query('SELECT * FROM orders WHERE id=? AND user_id=?', [id, userId]))[0][0];
+  (await pool.query(
+    `SELECT o.*, e.name AS event_name FROM orders o JOIN events e ON e.id=o.event_id
+     WHERE o.id=? AND o.user_id=?`, [id, userId]))[0][0];
 
 // 2a) Pago aprobado: marca PAID y genera un ticket con UUID por boleto.
 exports.markPaid = (orderId, paymentRef) => tx(async (c) => {

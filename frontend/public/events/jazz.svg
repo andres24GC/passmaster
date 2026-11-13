@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" width="800" height="400">
+  <defs>
+    <linearGradient id="jbg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1c1917"/><stop offset="1" stop-color="#292524"/>
+    </linearGradient>
+    <radialGradient id="spot" cx=".5" cy=".35" r=".6">
+      <stop offset="0" stop-color="#f59e0b" stop-opacity=".55"/><stop offset="1" stop-color="#f59e0b" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fcd34d"/><stop offset="1" stop-color="#d97706"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="400" fill="url(#jbg)"/>
+  <rect width="800" height="400" fill="url(#spot)"/>
+  <ellipse cx="400" cy="352" rx="200" ry="20" fill="#000" opacity=".45"/>
+  <g fill="url(#gold)">
+    <path d="M372 130 a34 34 0 1 1 68 0 a34 34 0 1 1 -68 0 M406 164 c0 40 -6 70 -6 104 c0 44 18 76 52 76 c26 0 44 -18 44 -42 c0 -20 -14 -34 -32 -34 c-14 0 -24 8 -28 20 c-2 -34 6 -66 6 -96 c0 -18 -8 -28 -22 -28 c-12 0 -20 8 -20 22 z"/>
+    <path d="M462 322 c22 0 40 14 40 32 c0 16 -14 28 -34 28 c-16 0 -28 -8 -34 -20 c6 4 14 6 22 6 z"/>
+  </g>
+  <g fill="#fde68a" opacity=".9">
+    <circle cx="250" cy="180" r="11"/><rect x="258" y="130" width="6" height="52" rx="3"/><path d="M258 130 q16 6 22 18" stroke="#fde68a" stroke-width="6" fill="none"/>
+    <circle cx="560" cy="205" r="9"/><rect x="567" y="164" width="5" height="43" rx="3"/><path d="M567 164 q14 5 19 15" stroke="#fde68a" stroke-width="5" fill="none"/>
+    <circle cx="620" cy="150" r="7"/><rect x="588" y="116" width="4" height="36" rx="2"/>
+  </g>
+  <rect y="356" width="800" height="44" fill="#0c0a09"/>
+  <g fill="#0c0a09">
+    <circle cx="90" cy="366" r="16"/><rect x="76" y="378" width="28" height="24" rx="8"/>
+    <circle cx="200" cy="370" r="14"/><rect x="188" y="381" width="24" height="20" rx="7"/>
+    <circle cx="640" cy="368" r="15"/><rect x="626" y="379" width="27" height="22" rx="8"/>
+    <circle cx="730" cy="372" r="13"/><rect x="718" y="382" width="23" height="19" rx="7"/>
+  </g>
+  <text x="400" y="86" font-family="Georgia, serif" font-size="36" font-weight="bold" fill="#fbbf24" text-anchor="middle" letter-spacing="6">JAZZ NIGHT</text>
+</svg>
