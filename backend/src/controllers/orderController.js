@@ -2,7 +2,7 @@ const Order = require('../models/orderModel');
 const gateway = require('../services/paymentGateway');
 const httpError = require('../utils/httpError');
 
-// Paso 1: reservar cupos y crear el pedido.
+// Paso 1: reservar cupos y crear el pedido. Solo rol 'customer'.
 exports.create = async (req, res, next) => {
   try {
     const qty = Number(req.body.quantity);
@@ -13,19 +13,35 @@ exports.create = async (req, res, next) => {
 };
 
 // Paso 2: cobrar. Si se aprueba, se emiten los tickets; si no, se liberan los cupos.
+// Devuelve el recibo de pago para mostrar al cliente.
 exports.pay = async (req, res, next) => {
   try {
     const order = await Order.findOwned(req.params.id, req.user.id);
     if (!order) throw httpError(404, 'Pedido no encontrado');
     if (order.status !== 'PENDING') throw httpError(409, 'El pedido ya fue procesado');
-    const result = await gateway.charge({ amount: order.total, token: req.body.paymentToken, orderId: order.id });
+
+    const result = await gateway.charge({
+      amount: order.total,
+      token: req.body.paymentToken,
+      orderId: order.id,
+    });
+
     if (!result.ok) {
       await Order.markFailed(order.id);
-      throw httpError(402, result.reason);
+      throw httpError(402, result.reason || 'Pago rechazado');
     }
+
     const tickets = await Order.markPaid(order.id, result.ref);
-    res.json({ status: 'PAID', paymentRef: result.ref, tickets });
+
+    res.json({
+      status: 'PAID',
+      paymentRef: result.ref,
+      receipt: result.receipt || null,
+      tickets,
+    });
   } catch (e) { next(e); }
 };
 
-exports.mine = async (req, res, next) => { try { res.json(await Order.findByUser(req.user.id)); } catch (e) { next(e); } };
+exports.mine = async (req, res, next) => {
+  try { res.json(await Order.findByUser(req.user.id)); } catch (e) { next(e); }
+};

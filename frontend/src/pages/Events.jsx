@@ -4,12 +4,12 @@ import { api } from '../api';
 import { useAuth } from '../auth';
 
 const EVENT_IMAGES = [
-  'https://images.unsplash.com/photo-1459749411477-64901fa7790e?w=600&q=80',
-  'https://images.unsplash.com/photo-1514519774440-3e134950f925?w=600&q=80',
-  'https://images.unsplash.com/photo-1517694691331-4d5e5a1e1f4e?w=600&q=80',
-  'https://images.unsplash.com/photo-1535102908407-7e73941c2c48?w=600&q=80',
-  'https://images.unsplash.com/photo-1461896836736-2de47fd90c49?w=600&q=80',
-  'https://images.unsplash.com/photo-1579783930042-2ee0759d0a06?w=600&q=80',
+  'https://images.unsplash.com/photo-1459749411477-64901fa7790e?w=800&q=80', // concierto
+  'https://images.unsplash.com/photo-1514519774440-3e134950f925?w=800&q=80', // jazz
+  'https://images.unsplash.com/photo-1517694691331-4d5e5a1e1f4e?w=800&q=80', // teatro
+  'https://images.unsplash.com/photo-1535102908407-7e73941c2c48?w=800&q=80', // conferencia
+  'https://images.unsplash.com/photo-1461896836736-2de47fd90c49?w=800&q=80', // fútbol
+  'https://images.unsplash.com/photo-1579783930042-2ee0759d0a06?w=800&q=80', // arte
 ];
 
 const money = (n) => Number(n).toLocaleString('es-CO', { style: 'currency', currency: 'COP', maximumFractionDigits: 0 });
@@ -23,16 +23,18 @@ export default function Events() {
   const [token, setToken] = useState('tok_visa');
   const [msg, setMsg] = useState(null);
   const [busy, setBusy] = useState(false);
+  const [receipt, setReceipt] = useState(null); // recibo de pago exitoso
 
   const load = () => api('/events').then(setEvents).catch(() => setEvents([]));
   useEffect(() => { load(); }, []);
 
   const buy = async () => {
-    setBusy(true); setMsg(null);
+    setBusy(true); setMsg(null); setReceipt(null);
     try {
       const order = await api('/orders', { method: 'POST', body: { eventId: sel.id, quantity: qty } });
-      await api(`/orders/${order.id}/pay`, { method: 'POST', body: { paymentToken: token } });
-      nav('/tickets');
+      const result = await api(`/orders/${order.id}/pay`, { method: 'POST', body: { paymentToken: token } });
+      setReceipt(result.receipt || null);
+      setSel(null);
     } catch (e) { setMsg(e.message); load(); }
     setBusy(false);
   };
@@ -49,10 +51,10 @@ export default function Events() {
             PassMaster • Ticketing de Eventos
           </span>
           <h1 className="text-4xl md:text-5xl font-bold mb-4 leading-tight">
-            Compra boletos digitales con código único
+            Boletos digitales con código único y QR
           </h1>
           <p className="text-indigo-100 text-lg max-w-2xl">
-            Genera tickets con QR, controla el acceso en tiempo real y evita sobreventa.
+            Compra boletos, genera tickets con identificador único y controla el acceso en tiempo real.
           </p>
         </div>
       </section>
@@ -65,12 +67,12 @@ export default function Events() {
           </div>
           {events.length > 0 && (
             <span className="px-3 py-1 rounded-full bg-green-100 text-green-700 text-sm font-bold">
-              {events.length} evento{events.length !== 1 ? 's' : ''} disponible{events.length !== 1 ? 's' : ''}
+              {events.length} evento{events.length !== 1 ? 's' : ''}
             </span>
           )}
         </div>
 
-        {/* Eventos */}
+        {/* Eventos - grid consistente, tarjetas alineadas */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {events.length === 0 ? (
             <div className="col-span-3 flex flex-col items-center justify-center py-20 bg-white rounded-2xl shadow border border-slate-200">
@@ -81,7 +83,7 @@ export default function Events() {
               </div>
               <h3 className="text-lg font-semibold text-slate-800 mb-2">No hay eventos disponibles</h3>
               {user?.role === 'admin' && (
-                <p className="text-sm text-slate-500 mb-4">Crea tu primer evento desde el <a href="/admin" className="text-indigo-600 hover:underline font-medium">Dashboard</a>.</p>
+                <p className="text-sm text-slate-500 mb-4">Crea uno desde el <a href="/admin" className="text-indigo-600 hover:underline font-medium">Dashboard</a>.</p>
               )}
               {user?.role === 'staff' && (
                 <p className="text-sm text-slate-500 mb-4">Espera a que el administrador cree eventos.</p>
@@ -95,13 +97,13 @@ export default function Events() {
 
               return (
                 <div key={e.id} className="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden hover:shadow-md transition duration-300 flex flex-col h-full">
-                  {/* Imagen del evento */}
-                  <div className="h-48 relative overflow-hidden">
+                  {/* Imagen del evento - altura fija para alinear todas las tarjetas */}
+                  <div className="h-52 relative overflow-hidden">
                     <img
                       src={img}
                       alt={e.name}
                       className="w-full h-full object-cover object-center"
-                      onError={(e) => { e.target.src = 'https://images.unsplash.com/photo-1533155820116-7d9a2b6f624e?w=600&q=80'; }}
+                      onError={(e) => { e.target.src = 'https://images.unsplash.com/photo-1533155820116-7d9a2b6f624e?w=800&q=80'; }}
                     />
                     <div className="absolute top-3 left-3 z-10">
                       <span className={`px-2.5 py-1 rounded text-xs font-bold ${
@@ -118,9 +120,7 @@ export default function Events() {
                   </div>
 
                   <div className="p-5 flex-1 flex flex-col">
-                    <div className="flex items-start justify-between mb-2">
-                      <h3 className="font-bold text-lg text-slate-800 leading-tight">{e.name}</h3>
-                    </div>
+                    <h3 className="font-bold text-lg text-slate-800 leading-tight mb-2">{e.name}</h3>
                     <p className="text-sm text-slate-500 mb-4 line-clamp-2">{e.description}</p>
 
                     <div className="space-y-2 mb-5">
@@ -145,14 +145,11 @@ export default function Events() {
                         <span>Vendidos: {e.sold || 0}</span>
                       </div>
                       <div className="w-full bg-slate-100 rounded-full h-2 overflow-hidden">
-                        <div
-                          className="h-full bg-indigo-600 transition-all duration-500"
-                          style={{ width: `${pct}%` }}
-                        />
+                        <div className="h-full bg-indigo-600 transition-all duration-500" style={{ width: `${pct}%` }} />
                       </div>
                     </div>
 
-                    {/* Botón de compra (solo clientes) */}
+                    {/* Botón de compra - solo clientes */}
                     <button
                       disabled={!canBuy || available <= 0 || busy}
                       onClick={() => canBuy ? (setSel(e), setQty(1), setMsg(null)) : nav('/login')}
@@ -166,7 +163,7 @@ export default function Events() {
                     >
                       {!canBuy ? (
                         <>
-                          <span className="text-xs opacity-70">Inicia sesión</span>
+                          <span className="text-xs opacity-70">Inicia sesión para comprar</span>
                           <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055zM5 13h14M5 13h.01M21 13h.01M5 7h.01M21 7h.01" /></svg>
                         </>
                       ) : available <= 0 ? (
@@ -181,6 +178,38 @@ export default function Events() {
             })
           )}
         </div>
+
+        {/* Confirmación de pago exitoso (recibo) */}
+        {receipt && (
+          <div className="mt-8 bg-green-50 border border-green-200 rounded-2xl p-6 shadow-sm">
+            <div className="flex items-start gap-4">
+              <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
+                <svg className="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
+              <div>
+                <h3 className="font-bold text-green-800 mb-1">¡Pago aprobado!</h3>
+                <p className="text-sm text-green-700">Tu pago fue procesado exitosamente. Se han generado tus boletos.</p>
+              </div>
+            </div>
+            <div className="mt-4 p-4 bg-white rounded-lg border border-slate-100">
+              <div className="flex justify-between text-sm mb-2">
+                <span className="text-slate-500">Referencia de pago:</span>
+                <span className="font-mono text-green-600 font-semibold">{receipt.reference}</span>
+              </div>
+              <div className="flex justify-between text-sm mb-2">
+                <span className="text-slate-500">Método:</span>
+                <span className="font-semibold">{receipt.paymentMethod?.card?.brand} · •••• {receipt.paymentMethod?.card?.last4}</span>
+              </div>
+              <div className="flex justify-between text-sm font-bold">
+                <span className="text-slate-600">Total:</span>
+                <span className="text-green-600">{money(receipt.amount)}</span>
+              </div>
+            </div>
+            <p className="mt-3 text-sm text-slate-500">Ve a <a href="/tickets" className="text-indigo-600 hover:underline font-medium">Mis tickets</a> para ver tus boletos con QR.</p>
+          </div>
+        )}
       </div>
 
       {/* Modal de compra */}
@@ -191,12 +220,12 @@ export default function Events() {
               ✕
             </button>
 
-            <div className="h-32 bg-slate-100 rounded-xl overflow-hidden mb-4 flex items-center justify-center">
+            <div className="h-36 bg-slate-100 rounded-xl overflow-hidden mb-4 flex items-center justify-center">
               <img
                 src={EVENT_IMAGES[events.findIndex(e => e.id === sel.id) % EVENT_IMAGES.length]}
                 alt={sel.name}
                 className="w-full h-full object-cover"
-                onError={(e) => { e.target.src = 'https://images.unsplash.com/photo-1533155820116-7d9a2b6f624e?w=600&q=80'; }}
+                onError={(e) => { e.target.src = 'https://images.unsplash.com/photo-1533155820116-7d9a2b6f624e?w=800&q=80'; }}
               />
             </div>
 
@@ -234,8 +263,12 @@ export default function Events() {
             <label className="block text-sm font-semibold text-slate-700 mb-1.5">Tarjeta de prueba (sandbox)</label>
             <select value={token} onChange={(e) => setToken(e.target.value)} className="w-full border rounded-lg p-2.5 mb-5 bg-slate-50">
               <option value="tok_visa">4242 4242 4242 4242 (aprobada)</option>
+              <option value="tok_mastercard">4444 4444 4444 4444 (aprobada)</option>
+              <option value="tok_amex">3782 822463 1005 (aprobada)</option>
               <option value="tok_declined">4000 0000 0000 0002 (rechazada)</option>
               <option value="tok_funds">4000 0000 0000 9995 (sin fondos)</option>
+              <option value="tok_expired">Tarjeta expirada</option>
+              <option value="tok_fraud">Posible fraude</option>
             </select>
 
             <div className="mb-5">
@@ -255,9 +288,9 @@ export default function Events() {
               <button
                 onClick={buy}
                 disabled={busy}
-                className="flex-1 bg-green-600 text-white py-3.5 rounded-xl font-bold disabled:opacity-50 hover:bg-green-500 transition"
+                className="flex-1 bg-green-600 text-white py-3.5 rounded-xl font-bold disabled:opacity-50 hover:bg-green-500 transition shadow-lg"
               >
-                {busy ? 'Procesando…' : 'Pagar boletos'}
+                {busy ? 'Procesando pago…' : 'Pagar boletos'}
               </button>
               <button onClick={() => setSel(null)} className="flex-1 border border-slate-300 py-3.5 rounded-xl font-bold text-slate-600 hover:bg-slate-50">
                 Cancelar
