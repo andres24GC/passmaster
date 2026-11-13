@@ -14,8 +14,9 @@ router.get('/events/:id', events.get);
 router.post('/events', authenticate, authorize('admin'), events.create);
 router.get('/admin/dashboard', authenticate, authorize('admin'), events.dashboard);
 
-router.post('/orders', authenticate, orders.create);
-router.post('/orders/:id/pay', authenticate, orders.pay);
+// Solo clientes pueden comprar boletos (staff y admin solo validan/check-in)
+router.post('/orders', authenticate, authorize('customer'), orders.create);
+router.post('/orders/:id/pay', authenticate, authorize('customer'), orders.pay);
 router.get('/orders/mine', authenticate, orders.mine);
 
 router.get('/tickets/mine', authenticate, tickets.mine);
