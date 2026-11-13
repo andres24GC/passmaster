@@ -23,5 +23,6 @@ router.get('/orders/:id', authenticate, orders.detail);
 router.get('/tickets/mine', authenticate, tickets.mine);
 router.get('/tickets/:code', authenticate, authorize('staff', 'admin'), tickets.lookup);
 router.post('/tickets/checkin', authenticate, authorize('staff', 'admin'), tickets.checkin);
+router.get('/tickets/event/:eventId', authenticate, authorize('staff', 'admin'), tickets.byEvent);
 
 module.exports = router;

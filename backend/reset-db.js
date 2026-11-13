@@ -96,12 +96,12 @@ const mysql = require('mysql2/promise');
     const ahora = new Date();
     const sumarDias = (d) => new Date(ahora.getTime() + d * 86400000).toISOString().slice(0, 19).replace('T', ' ');
     const eventos = [
-      ['Concierto de Apertura','Evento de demostración','Teatro Central', sumarDias(30), 100, 50000, 1],
-      ['Festival de Jazz','Noches de jazz en vivo','Auditorio Sur', sumarDias(15), 200, 35000, 1],
-      ['Obra de Teatro: La Casa','Drama contemporáneo','Teatro Municipal', sumarDias(45), 150, 25000, 1],
-      ['Conferencia Tech 2026','Tecnología e innovación','Centro de Convenciones', sumarDias(60), 300, 80000, 1],
-      ['Partido de Fútbol Final','Gran final del torneo','Estadio Norte', sumarDias(10), 500, 120000, 1],
-      ['Exposición de Arte Moderno','Arte contemporáneo','Galería Centro', sumarDias(90), 120, 15000, 1],
+      ['Concierto de Apertura','Evento de demostración del sistema PassMaster','Teatro Central', sumarDias(30), 10, 50000, 1],
+      ['Festival de Jazz','Noches de jazz en vivo','Auditorio Sur', sumarDias(15), 10, 35000, 1],
+      ['Obra de Teatro: La Casa','Drama contemporáneo','Teatro Municipal', sumarDias(45), 10, 25000, 1],
+      ['Conferencia Tech 2026','Tecnología e innovación','Centro de Convenciones', sumarDias(60), 10, 80000, 1],
+      ['Partido de Fútbol Final','Gran final del torneo','Estadio Norte', sumarDias(10), 10, 120000, 1],
+      ['Exposición de Arte Moderno','Arte contemporáneo','Galería Centro', sumarDias(90), 10, 15000, 1],
     ];
     for (const [name, desc, venue, starts_at, capacity, price, created_by] of eventos) {
       await conn.query(

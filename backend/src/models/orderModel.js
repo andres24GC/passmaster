@@ -38,9 +38,12 @@ exports.findOwned = async (id, userId) =>
      WHERE o.id=? AND o.user_id=?`, [id, userId]))[0][0];
 
 // 2a) Pago aprobado: marca PAID y genera un ticket con UUID por boleto.
+// Idempotencia: si el pedido ya tiene tickets, no vuelve a generar (evita duplicados).
 exports.markPaid = (orderId, paymentRef) => tx(async (c) => {
   const [[o]] = await c.query('SELECT * FROM orders WHERE id=? FOR UPDATE', [orderId]);
   if (o.status !== 'PENDING') throw httpError(409, 'El pedido ya fue procesado');
+  const [[existing]] = await c.query('SELECT COUNT(*) AS n FROM tickets WHERE order_id=?', [o.id]);
+  if (Number(existing.n) > 0) throw httpError(409, 'Este pedido ya tiene tickets emitidos');
   const rows = Array.from({ length: o.quantity }, () => [crypto.randomUUID(), o.id, o.event_id]);
   await c.query('INSERT INTO tickets (code,order_id,event_id) VALUES ?', [rows]);
   await c.query("UPDATE orders SET status='PAID', payment_ref=? WHERE id=?", [paymentRef, o.id]);

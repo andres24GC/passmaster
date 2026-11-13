@@ -17,12 +17,12 @@ const pool = require('../config/db');
   }
 
   const eventos = [
-    ['Concierto de Apertura','Evento de demostración','Teatro Central', `DATE_ADD(NOW(), INTERVAL 30 DAY)`, 100, 50000, 1],
-    ['Festival de Jazz','Noches de jazz en vivo','Auditorio Sur', `DATE_ADD(NOW(), INTERVAL 15 DAY)`, 200, 35000, 1],
-    ['Obra de Teatro: La Casa','Drama contemporáneo','Teatro Municipal', `DATE_ADD(NOW(), INTERVAL 45 DAY)`, 150, 25000, 1],
-    ['Conferencia Tech 2026','Tecnología e innovación','Centro de Convenciones', `DATE_ADD(NOW(), INTERVAL 60 DAY)`, 300, 80000, 1],
-    ['Partido de Fútbol Final','Gran final del torneo','Estadio Norte', `DATE_ADD(NOW(), INTERVAL 10 DAY)`, 500, 120000, 1],
-    ['Exposición de Arte Moderno','Arte contemporáneo','Galería Centro', `DATE_ADD(NOW(), INTERVAL 90 DAY)`, 120, 15000, 1],
+    ['Concierto de Apertura','Evento de demostración del sistema PassMaster','Teatro Central', `DATE_ADD(NOW(), INTERVAL 30 DAY)`, 10, 50000, 1],
+    ['Festival de Jazz','Noches de jazz en vivo','Auditorio Sur', `DATE_ADD(NOW(), INTERVAL 15 DAY)`, 10, 35000, 1],
+    ['Obra de Teatro: La Casa','Drama contemporáneo','Teatro Municipal', `DATE_ADD(NOW(), INTERVAL 45 DAY)`, 10, 25000, 1],
+    ['Conferencia Tech 2026','Tecnología e innovación','Centro de Convenciones', `DATE_ADD(NOW(), INTERVAL 60 DAY)`, 10, 80000, 1],
+    ['Partido de Fútbol Final','Gran final del torneo','Estadio Norte', `DATE_ADD(NOW(), INTERVAL 10 DAY)`, 10, 120000, 1],
+    ['Exposición de Arte Moderno','Arte contemporáneo','Galería Centro', `DATE_ADD(NOW(), INTERVAL 90 DAY)`, 10, 15000, 1],
   ];
 
   for (const [name, desc, venue, starts_at, capacity, price, created_by] of eventos) {
